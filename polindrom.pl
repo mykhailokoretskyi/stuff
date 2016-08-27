@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 use strict;
+use warnings;
 
 my $linesQuantity = <>;
 chomp $linesQuantity;
@@ -45,11 +46,13 @@ sub findIndexOfBreakingCharacter {
         if ($chars[$i] ne $chars[-1 - $i]){
             my @testChars = @chars;
             delete $testChars[$i];
+            @testChars = grep {$_} @testChars;
             if (isPalindrome(join '', @testChars)){
                 return $i;
             }
             @testChars = @chars;
             delete $testChars[-1 -$i];
+            @testChars = grep {$_} @testChars;
             if (isPalindrome(join '', @testChars)){
                 return scalar @chars - ($i + 1);
             }
